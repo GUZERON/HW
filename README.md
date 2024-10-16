@@ -71,9 +71,7 @@ x_t = ilaplace(X_s, s, t)
 ```
 
 
-$
-x(t)=\frac{2 \sin \left( \frac{t \sqrt{- b^2 + 4 k m}}{2 m} \right) e^ \left( -\frac{b t}{2 m} \right)}{\sqrt{- b^2 + 4 k m}}
-$
+$x(t)=\frac{2 \sin \left( \frac{t \sqrt{- b^2 + 4 k m}}{2 m} \right) e^ \left( -\frac{b t}{2 m} \right)}{\sqrt{- b^2 + 4 k m}}$
 
 ---
 
@@ -95,19 +93,9 @@ $F(s) = Ms^2X(s) +bsX(s) + kX(s) - bsY(s) - kY(s)$
 $0 = ms^2Y(s) +bsY(s) + kY(s) - bsX(s) - kX(s)$
 
 와 같이 된다. 이를 행렬 식으로 작성하면
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/WyWdhW8/image.png" alt="image" border="0"></a>  
 
-$\begin{pmatrix}
-Ms^s+bs+k & -bs-k \\
- -bs-k  & ms^2+bs+k
-\end{pmatrix}\begin{pmatrix}
-X(s) \\
- Y(s)
-\end{pmatrix}=\begin{pmatrix}
-F(s) \\
- 0
-\end{pmatrix}$
-
-
+  
 매트랩 코드
 
 ```
@@ -167,17 +155,7 @@ $\to -X(s) + (s^2 + 1)Y(s) = U(s)$
 
 행렬형태로 작성
 
-$
-\begin{pmatrix}s^2+2 &-1  \\
--1 & s^2+1 \\
-\end{pmatrix}  \begin{pmatrix}
-X(s) \\
- Y(s)
-\end{pmatrix} = \begin{pmatrix}
-0 \\
- U(s)
-\end{pmatrix}
-$
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/x341QyK/image.png" alt="image" border="0"></a>
 
 Y(s), 전달함를 구하는 매트랩 코드
 

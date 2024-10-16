@@ -1,182 +1,202 @@
-<a href="https://ibb.co/XYxGycG"><img src="https://i.ibb.co/GHQrszr/image.png" alt="image" border="0"></a>
+# HW1
 
-(a) 상태 변수로 표현된 1차 미분 방정식을 구하기 위해서, 적당한 상태변수는 $x_1(t)=$변위 와 $x_2(t)=$속도로 설정한다.
-
-(b) 상태 변수로 1차 미분 방정식을 구현하면,
-
-$$x_1(t)=y(t) $$
-
-$$x_2(t)=\frac{y(t)}{dt}$$
-
-이 되고, 질량, 마찰력, 스프링의 탄성에 대한 운동 방정식을 작성하게 되면
-
-$$M\frac{\mathrm{d^2}y(t) }{\mathrm{d} t^2}+b\frac{\mathrm{d}y(t) }{\mathrm{d} t}+ky(x)=r(t)$$
-
-이 된다.
-
-(c) 상태 미분 방정식은 변위를 미분하면 속도가 되기 때문에, 이를 식으로 나타내면
+<div align="right"><font size="4">2019732072 이태현</font></div>
 
 
-$$x_2(t)=\frac{y(t)}{dt}=\frac{dx_1(t)}{dt}$$ 이고,
+---
 
-$$\frac{dx_2(t)}{dt}=-\frac{b}{m}x_2(t)+\frac{k}{m}x_1(t)+\frac{1}{M}r(t)$$ 이 된다.
+### P2.7
 
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/0FjdCyM/image.png" alt="image" border="0">
 
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/RYpxjj4/image.png" alt="image" border="0"></a>
+$v_2(t) = -v_1(t) \int_0^t \frac{dt}{RC}$
 
-우선 상태변수는
-
-$$x_1(t)=i_L(t), x_2(t)=V_c(t) $$
-
-이고,
-
-KCL과 KVL을 이용해서 RLC회로를 해석하게 되면,
-
-
-$$C\frac{dV_c}{dt}=i_R-i_L$$
-
-$$R*i_R=V_2-V_c$$
-
-가 된다. 이를 식을 정리하면,
-
-$$\frac{dx_2(t)}{dt}=\frac{V_2}{RC}-\frac{x_2(t)}{RC}-\frac{x_1(t)}{R}$$
-
-$$\frac{dx_1(t)}{dt}=\frac{V_1}{L}-\frac{V_2}{L}+\frac{x_2(t)}{L}$$
-
-이고, 이를 행렬로 정리하면,
-$$
-\begin{pmatrix} \dot{x_1} \\ \dot{x_2} \end{pmatrix} = \begin{bmatrix} 0 & 1/c \\ -1/c & -1/RC \end{bmatrix} \begin{pmatrix} x_1 \\ x_2 \end{pmatrix} + \begin{bmatrix} 1/L & -1/L \\ 0 & 1/RC \end{bmatrix} \begin{pmatrix} V_1 \\ V_2 \end{pmatrix}
-$$
+위 수식에 라플라스 변환을 적용하면  
+$$V_2(s) = -\frac{V_1(s)}{sRC}$$  
+이 되고 전달함수는  
+$$G(s) = \frac{V_2(s)}{V_1(s)} = \frac{1}{sRC}$$
 이다.
 
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/DgdnL8L/image.png" alt="image" border="0"></a>
+---
 
-(a) 폐루프의 전달 함수는 구하게 되면, 한번 반환 되는 부분을 잘 생각해야한다. 이를 통해 식을 세우면,
+### P2.12
 
-$$T(s)=\frac{Y(s)}{R(s)}=\frac{G(s)}{1+G(s)}=\frac{\frac{s+2}{s^3+5s^2-24s}}{1+\frac{s+2}{s^3+5s^2-24s}}=\frac{s+2}{s^3+5s^2-23s+2}$$
 
-가 된다.
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/gjN66C5/image.png" alt="image" border="0"></a>
 
-(b) 이를 통해 상태모델과 phase variable form으로 작성하면,
+$\frac{Y(s)}{R(s)} = \frac{K}{s+50}$  
+여기서 단위계단 입력이므로
+$R(s) = \frac{1}{s}$
 
-$$A=
-\begin{bmatrix}
-0&1&0 \\\\
-0&0&1 \\\\
--2&23&-5
-\end{bmatrix}$$
+이다.
 
-$$B=
-\begin{bmatrix}
-0\\\
-0\\\
-1
-\end{bmatrix}$$
+$Y(s) = \frac{k}{s(s+50)} = \frac{k}{50}(\frac{1}{s}-\frac{1}{s+50})$
 
-$$C=
-\begin{bmatrix}
-2&1&0
-\end{bmatrix}$$
+이고, 역라플라스 변환을 진행하면
 
-이므로,
-$$
-\dot{x}(t) = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ -2 & 23 & -5 \end{bmatrix} x(t) + \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} u(t)
-$$
+$y(t) = \frac{k}{50}(1-e^{-50t})$
 
-$$
-y(t) = \begin{bmatrix} 2 & 1 & 0 \end{bmatrix} x(t)
-$$
+이고,  
+$\displaystyle \lim_{t\to\infty}y(t) =\frac{k}{50}=1$  
+이다. 따라서 $k = 50$
 
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/b344f76/image.png" alt="image" border="0"></a>
+---
 
-(a) 상태 공간 모델을 구하게 되면,
-$$
-Y(s) = (8s + 40) z(s)
-$$
+### P2.15
 
-$$
-R(s) = (s^3 + 12s^2 + 44s + 48) z(s)
-$$
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/YbCsrmR/image.png" alt="image" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/xhn645B/image.png" alt="image" border="0"></a>
+  
+추의 중력, 에너지 손실기, 스프링 장력
 
-$$
-\dot{x}(t) = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ -48 & -44 & -12 \end{bmatrix} x(t) + \begin{bmatrix} 0 \\ 0 \\ 1 \end{bmatrix} r(t)
-$$
+$m\frac{d^2x(t)}{dt^2}+b\frac{dx(t)}{dt}+kx(t)=0$  
+라플라스 변환  
+$ms^2X(s)+bsX(s)+kX(s) = 0$
 
-$$
-y(t) = \begin{bmatrix} 40 & 8 & 0 \end{bmatrix} x(t)
-$$
+$X(s) = \frac{1}{ms^2 + bs + k}$
 
-(b) 상태 천이 행렬을 구하는 식은
+역라플라스 변환  
+매트랩 코드
 
-$$A=
-\begin{bmatrix}
-0&1&0 \\\\
-0&0&1 \\\\
--48&-44&-12
-\end{bmatrix}$$
-$$ B=
-\begin{bmatrix}
-0\\\\
-0\\\\
-1
-\end{bmatrix}$$
-$$c=
-\begin{bmatrix}
-40&8&0
-\end{bmatrix}$$
+```
+clear;
+% 변수 생성
+syms s t m b k X_s X_t
+
+% 식 정의
+X_s = 1/(m*s^2+b*s+k)
+
+% 역라플라스 변환
+x_t = ilaplace(X_s, s, t)
+```
+
 
 $
-\dot{x} = A x(t) + B r(t), \
-$
-$
-y(t) = CX(t)
+x(t)=\frac{2 \sin \left( \frac{t \sqrt{- b^2 + 4 k m}}{2 m} \right) e^ \left( -\frac{b t}{2 m} \right)}{\sqrt{- b^2 + 4 k m}}
 $
 
-$
-SX(s)-x(0)=AX(s)+BR(s)→X(s)=\frac{B}{SI-A}R(s)+\frac{1}{SI-A}x(0)
-$
+---
+
+### P2.26
+
+
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/t4T6DNh/image.png" alt="image" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/n12tVx0/image.png" alt="image" border="0"></a>  
+스프링-질량-감쇄기 모델 식
+
+$F(t) = M\frac{\mathrm{d^2x(t)}}{\mathrm{d} x^2} +b(\frac{\mathrm{dx(t)} }{\mathrm{d} x} -\frac{\mathrm{dy(t)} }{\mathrm{d} x}) + k(x(t)-y(t))$
+
+$0 = m\frac{\mathrm{d^2y(t)}}{\mathrm{d} x^2} +b( \frac{\mathrm{dy(t)} }{\mathrm{d} x} -\frac{\mathrm{dx(t)} }{\mathrm{d} x}) + k(y(t)-x(t))$
+
+라플라스 변환 적용
+
+$F(s) = Ms^2X(s) +bsX(s) + kX(s) - bsY(s) - kY(s)$
+
+$0 = ms^2Y(s) +bsY(s) + kY(s) - bsX(s) - kX(s)$
+
+와 같이 된다. 이를 행렬 식으로 작성하면
+
+$\begin{pmatrix}
+Ms^s+bs+k & -bs-k \\
+ -bs-k  & ms^2+bs+k
+\end{pmatrix}\begin{pmatrix}
+X(s) \\
+ Y(s)
+\end{pmatrix}=\begin{pmatrix}
+F(s) \\
+ 0
+\end{pmatrix}$
+
+
+매트랩 코드
+
+```
+% 변수 생성
+syms M m s b k X_s Y_s F_s
+
+% 행렬 입력
+A = [M*s^2+b*s+k -b*s-k;-b*s-k m*s^2+b*s+k]
+B = [X_s;Y_s]
+C = [F_s;0]
+
+% B행렬 계산
+sol = inv(A) * C
+
+% B행렬의 2번째(Y_s)/F_s 도출
+YOF = sol(2) / F_s
+pretty(YOF)
+```
+
+
+위 연산의 결과로 전달함수 $\frac{Y(s)}{F(s)}$는
+
+
+$$G(S) = \frac{Y(s)}{F(s)} = \frac{k+bs}{bms^3+kms^2+bMs^3+kMs^2+Mms^4}$$
+
+---
+
+### P2.37
+
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/zZm3CrB/image.png" alt="image" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/YdMFrKB/image.png" alt="image" border="0"></a>
+
+미분방정식 작성
+
+$m_{1}\frac{\mathrm{d^2}x(t)}{\mathrm{d} t} + k_1x(t) + k_2(x(t)-y(t)) = 0$
+
+$m_{2}\frac{\mathrm{d^2}y(t)}{\mathrm{d} t} + k_2(y(t)-x(t)) = u(t)$
+
+$m_1 = m_2 = K_1 = K_2 = 1$ 대입
+
+$\frac{\mathrm{d^2}x(t)}{\mathrm{d} x} = -2x(t) + y(t)$
+
+$\frac{\mathrm{d^2}y(t)}{\mathrm{d} t} = u(t) + x(t) -y(t)$
+
+
+## (b)
+
+라플라스 변환 적용
+
+$s^2X(s) = -2X(s) + Y(s)$
+
+$\to (s^2+2)X(s) - Y(s) = 0$
+
+$s^2Y(s) = U(s) + X(s) - Y(s)$
+
+$\to -X(s) + (s^2 + 1)Y(s) = U(s)$
+
+행렬형태로 작성
 
 $
-→X(t) = \mathrm{e^{At}}x(0)+S\mathrm{e^{A(t-τ)}}Bu(t)dt
+\begin{pmatrix}s^2+2 &-1  \\
+-1 & s^2+1 \\
+\end{pmatrix}  \begin{pmatrix}
+X(s) \\
+ Y(s)
+\end{pmatrix} = \begin{pmatrix}
+0 \\
+ U(s)
+\end{pmatrix}
 $
 
-$
-\Phi(t)=\mathrm{e^{At}}
-$
-이 된다.  
-이를 매트랩을 이용하여 상태 천이 행렬을 구하는 방식은 아래와 같다.
+Y(s), 전달함를 구하는 매트랩 코드
 
-syms s t   
-SI =[s -1 0; 0 s -1; 48 44 s+12]   
-PS=SI^-1  
-PT = ilaplace(PS);  
-PT
+```
+% 변수 생성
+clear;
+syms X_s Y_s U_s s
 
-<a href="https://ibb.co/HD2Q1Cr"><img src="https://i.ibb.co/QFcGzk6/image.png" alt="image" border="0"></a>
+% 행렬 선언
+A = [s^2+2 -1;-1 s^2+1]
+B = [X_s;Y_s]
+C = [0;U_s]
 
-<a href="https://imgbb.com/"><img src="https://i.ibb.co/nQSD1vK/image.png" alt="image" border="0"></a>   
+% Y_s 계산
+sol = inv(A)*C
 
-$ \dot{X}(t) = A X(t) + B u(t), \quad Y(t) = C x(t) + D u(t) $
+% 전달함수 계산
+resol = C(2)/sol(2)
 
-라플라스 변환을 적용하면:
+```
 
-$ sX(s) = A X(s) + B U(s) $
-
-$ Y(s) = C X(s) + D U(s) $
-
-정리하면:
-
-$ X(s) = \frac{B U(s)}{sI - A} $
-
-$ Y(s) = \frac{C B U(s)}{sI - A} + D U(s) = \left(\frac{C B}{sI - A} + D \right) U(s) $
-
-$ G(s) = \frac{Y(s)}{U(s)} = \frac{C B}{sI - A} + D $
-
-예시:
-
-$ A = \begin{pmatrix} 1 & 1 & -1 \\ 4 & 3 & 0 \\ -2 & 1 & 0 \end{pmatrix}, \quad
-B = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}, \quad
-C = \begin{pmatrix} 1 & 0 & 0 \end{pmatrix}, \quad
-D = 0 $
-
-$ sI = \begin{pmatrix} s & 0 & 0 \\ 0 & s & 0 \\ 0 & 0 & s \end{pmatrix} $
+$\frac{Y(s)}{U(s)} = \frac{s^2+2}{s^4+3s^2+1}$
